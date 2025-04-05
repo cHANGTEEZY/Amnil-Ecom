@@ -30,6 +30,8 @@ const Header = () => {
 
   const handleSearch = () => {
     setSearchValue(dropDownValue);
+    setSearchVisible(false);
+    setMobileMenuOpen(false);
   };
 
   return (

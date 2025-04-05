@@ -20,7 +20,13 @@ const Home = () => {
   const { items, apiError, searchValue } = useContext(SearchContext);
   const { Meta } = Card;
 
-  console.log("Search value is ", searchValue);
+  const handleCardClick = (itemId) => {
+    if (!isAuthenticated) {
+      navigate("/signin");
+    } else {
+      window.open(`/product/${itemId}`, "_blank");
+    }
+  };
 
   return (
     <>
@@ -31,12 +37,13 @@ const Home = () => {
           {items && items.length > 0 && !apiError ? (
             <>
               <h1 className="font-bold text-4xl text-gray-800 mb-5">
-                All {searchValue} Products
+                All {searchValue === "All Products" ? "" : searchValue} Products
               </h1>
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                 {items.map((item) => (
                   <Card
                     key={item.id}
+                    onClick={() => handleCardClick(item.id)}
                     hoverable
                     cover={
                       <img

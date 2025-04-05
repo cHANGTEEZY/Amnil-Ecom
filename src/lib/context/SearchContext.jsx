@@ -1,19 +1,22 @@
 import axios from "axios";
 import React, { createContext, useState, useEffect } from "react";
+import ErrorPage from "../../components/Error";
 
 const SearchContext = createContext();
 
 export const SearchContextProvider = ({ children }) => {
-  const [searchValue, setSearchValue] = useState("");
+  const [searchValue, setSearchValue] = useState("All Products");
   const [items, setItems] = useState([]);
   const [apiError, setApiError] = useState("");
 
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        let url = "https://fakestoreapi.com/products";
-
-        if (searchValue) {
+        let url;
+        if (searchValue === "All Products") {
+          url = "https://fakestoreapi.com/products";
+        }
+        if (searchValue !== "All Products") {
           url = `https://fakestoreapi.com/products/category/${searchValue}`;
         }
 
@@ -38,6 +41,10 @@ export const SearchContextProvider = ({ children }) => {
       setItems([]);
     };
   }, [searchValue]);
+
+  if (apiError) {
+    return <ErrorPage message={apiError} />;
+  }
 
   return (
     <SearchContext.Provider
