@@ -1,7 +1,13 @@
-
-@import '@fontsource/roboto/300.css';
-@import '@fontsource/roboto/400.css';
-@import '@fontsource/roboto/500.css';
-@import '@fontsource/roboto/700.css';
-
 @import "tailwindcss";
+
+:root {
+  --color-primary: #1e40af;   /* strong blue – trust and confidence */
+  --color-secondary: #f59e0b; /* amber – highlights, CTA */
+  --color-accent: #10b981;    /* emerald – success, confirmation */
+  --color-background: #f9fafb;/* light gray – soft background */
+  --color-foreground: #111827;/* dark gray – main text */
+  --color-muted: #6b7280;     /* medium gray – secondary text */
+  --color-danger: #ef4444;    /* red – errors or delete actions */
+}
+
+

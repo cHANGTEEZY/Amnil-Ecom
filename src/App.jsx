@@ -1,12 +1,15 @@
 import React from "react";
 import AppRoutes from "./routes/routes";
 import { AuthenticateProvider } from "./lib/context/AuthContext";
+import { SearchContextProvider } from "./lib/context/SearchContext";
 
 const App = () => {
   return (
-    <AuthenticateProvider>
-      <AppRoutes />
-    </AuthenticateProvider>
+    <SearchContextProvider>
+      <AuthenticateProvider>
+        <AppRoutes />
+      </AuthenticateProvider>
+    </SearchContextProvider>
   );
 };
 
