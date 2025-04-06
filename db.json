@@ -1,3 +1,36 @@
 {
-  "user": [{}]
+  "users": [
+    {
+      "id": "6a0c",
+      "firstName": "asd",
+      "lastName": "asd",
+      "email": "asd@gmail.com",
+      "password": "asdasd",
+      "confirmPassword": "asdasd"
+    },
+    {
+      "id": "0176",
+      "firstName": "asd",
+      "lastName": "asd",
+      "email": "asd@gmaila.cas",
+      "password": "asdasd",
+      "confirmPassword": "asdasd"
+    },
+    {
+      "id": "29f1",
+      "firstName": "new",
+      "lastName": "new",
+      "email": "new@gmail.com",
+      "password": "new",
+      "confirmPassword": "new"
+    },
+    {
+      "id": "51f0",
+      "firstName": "new1",
+      "lastName": "new1",
+      "email": "new1@gmail.com",
+      "password": "new1",
+      "confirmPassword": "new1"
+    }
+  ]
 }

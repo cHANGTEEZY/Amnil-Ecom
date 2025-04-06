@@ -13,12 +13,14 @@ import {
 } from "lucide-react";
 import { options } from "../lib/constants/SearchOptions";
 import SearchContext from "../lib/context/SearchContext";
+import AuthContext from "../lib/context/AuthContext";
 
 const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [searchVisible, setSearchVisible] = useState(false);
   const [dropDownValue, setDropDownValue] = useState("");
   const { setSearchValue } = useContext(SearchContext);
+  const { setIsAuthenticated } = useContext(AuthContext);
 
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!mobileMenuOpen);
@@ -32,6 +34,11 @@ const Header = () => {
     setSearchValue(dropDownValue);
     setSearchVisible(false);
     setMobileMenuOpen(false);
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem("userAuthToken");
+    setIsAuthenticated(false);
   };
 
   return (
@@ -72,28 +79,28 @@ const Header = () => {
           >
             <Search size={20} />
           </button>
-          <div className="relative">
-  <a href="/account" className="hidden sm:block" aria-label="Account">
-    <User size={20} />
-  </a>
+          <div className="relative group">
+            <a href="/account" className="hidden sm:block" aria-label="Account">
+              <User size={20} />
+            </a>
 
-  <div className="absolute right-0 mt-2 w-40 rounded-xl bg-white shadow-lg border border-gray-200 z-10">
-    <div className="flex flex-col p-4 space-y-2 text-sm text-gray-700">
-      <a
-        href="/account"
-        className="px-3 py-2 rounded-md hover:bg-gray-100 transition"
-      >
-        My Account
-      </a>
-      <button
-        className="text-left px-3 py-2 rounded-md hover:bg-red-100 transition text-red-600"
-      >
-        Logout
-      </button>
-    </div>
-  </div>
-</div>
-
+            <div className="absolute right-0 mt-2 w-40 rounded-xl bg-white shadow-lg border border-gray-200 z-10 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+              <div className="flex flex-col p-4 space-y-2 text-sm text-gray-700">
+                <a
+                  href="/account"
+                  className="px-3 py-2 rounded-md hover:bg-gray-100 transition"
+                >
+                  My Account
+                </a>
+                <button
+                  onClick={handleLogout}
+                  className="text-left px-3 py-2 rounded-md hover:bg-red-100 transition text-red-600"
+                >
+                  Logout
+                </button>
+              </div>
+            </div>
+          </div>
 
           <a href="/wishlist" className="hidden sm:block" aria-label="Wishlist">
             <Heart size={20} />
@@ -123,12 +130,12 @@ const Header = () => {
             />
             <button type="button" onClick={handleSearch}>
               <a href="#products">
-              <Search />
+                <Search />
               </a>
             </button>
           </div>
         </div>
-    )}
+      )}
 
       <Drawer
         title="Menu"
