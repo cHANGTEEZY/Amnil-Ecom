@@ -4,7 +4,7 @@ import { hero1, hero2, hero3 } from "../assets";
 
 const Hero = () => {
   return (
-    <div className="relative max-w-[1800px] mx-auto my-10">
+    <div className="relative max-w-[1400px] mx-auto my-10">
       <Carousel
         autoplay
         infinite={true}

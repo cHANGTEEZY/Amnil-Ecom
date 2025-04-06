@@ -72,9 +72,29 @@ const Header = () => {
           >
             <Search size={20} />
           </button>
-          <a href="/account" className="hidden sm:block" aria-label="Account">
-            <User size={20} />
-          </a>
+          <div className="relative">
+  <a href="/account" className="hidden sm:block" aria-label="Account">
+    <User size={20} />
+  </a>
+
+  <div className="absolute right-0 mt-2 w-40 rounded-xl bg-white shadow-lg border border-gray-200 z-10">
+    <div className="flex flex-col p-4 space-y-2 text-sm text-gray-700">
+      <a
+        href="/account"
+        className="px-3 py-2 rounded-md hover:bg-gray-100 transition"
+      >
+        My Account
+      </a>
+      <button
+        className="text-left px-3 py-2 rounded-md hover:bg-red-100 transition text-red-600"
+      >
+        Logout
+      </button>
+    </div>
+  </div>
+</div>
+
+
           <a href="/wishlist" className="hidden sm:block" aria-label="Wishlist">
             <Heart size={20} />
           </a>
@@ -102,11 +122,13 @@ const Header = () => {
               }
             />
             <button type="button" onClick={handleSearch}>
+              <a href="#products">
               <Search />
+              </a>
             </button>
           </div>
         </div>
-      )}
+    )}
 
       <Drawer
         title="Menu"
