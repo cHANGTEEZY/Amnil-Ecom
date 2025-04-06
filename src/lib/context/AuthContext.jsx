@@ -8,7 +8,7 @@ const AuthContext = createContext();
 export const AuthenticateProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [userId, setUserId] = useState(null);
-  const [userDetails, setUserDetails] = useState(null);
+  const [userDetails, setUserDetails] = useState([]);
   const [error, setError] = useState({ message: null, code: null });
 
   useEffect(() => {

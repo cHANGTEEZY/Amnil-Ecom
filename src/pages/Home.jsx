@@ -36,7 +36,10 @@ const Home = () => {
         <section className="py-6 px-4 max-w-[1400px] m-auto">
           {items && items.length > 0 && !apiError ? (
             <>
-              <h1 className="font-bold text-4xl text-gray-800 mb-5" id="products">
+              <h1
+                className="font-bold text-4xl text-gray-800 mb-5"
+                id="products"
+              >
                 All {searchValue === "All Products" ? "" : searchValue} Products
               </h1>
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">

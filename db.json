@@ -5,7 +5,7 @@
       "firstName": "asd",
       "lastName": "asd",
       "email": "asd@gmail.com",
-      "password": "asdasd",
+      "password": "asdasdasd",
       "confirmPassword": "asdasd"
     },
     {
@@ -31,6 +31,14 @@
       "email": "new1@gmail.com",
       "password": "new1",
       "confirmPassword": "new1"
+    },
+    {
+      "id": "e996",
+      "firstName": "sushank",
+      "lastName": "gurung",
+      "email": "sushank@gmail.com",
+      "password": "asdasd",
+      "confirmPassword": "asdasd"
     }
   ]
 }

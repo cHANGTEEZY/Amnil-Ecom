@@ -7,6 +7,7 @@ import Signup from "../pages/SignUp";
 import Signin from "../pages/SignIn";
 import Product from "../pages/Product";
 import AccountPage from "../pages/Account";
+import Cart from "../pages/Cart";
 
 const AppRoutes = () => {
   return (
@@ -18,6 +19,7 @@ const AppRoutes = () => {
         <Route path="/signup" element={<Signup />} />
         <Route path="/product/:id" element={<Product />} />
         <Route path="/account" element={<AccountPage />} />
+        <Route path="/cart" element={<Cart />} />
       </Routes>
     </Router>
   );

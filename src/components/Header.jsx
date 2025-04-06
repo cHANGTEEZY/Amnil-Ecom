@@ -2,20 +2,13 @@ import React, { useContext } from "react";
 
 import { useState } from "react";
 import { Badge, Drawer, AutoComplete } from "antd";
-import {
-  ShoppingCart,
-  User,
-  Search,
-  Menu,
-  Heart,
-  X,
-  ChevronDown,
-} from "lucide-react";
+import { ShoppingCart, User, Search, Menu } from "lucide-react";
 import { options } from "../lib/constants/SearchOptions";
 import SearchContext from "../lib/context/SearchContext";
 import AuthContext from "../lib/context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
-const Header = () => {
+const Header = ({ showNav = true, showSearch = true }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [searchVisible, setSearchVisible] = useState(false);
   const [dropDownValue, setDropDownValue] = useState("");
@@ -36,9 +29,12 @@ const Header = () => {
     setMobileMenuOpen(false);
   };
 
+  const navigate = useNavigate();
+
   const handleLogout = () => {
     localStorage.removeItem("userAuthToken");
     setIsAuthenticated(false);
+    navigate("/signin");
   };
 
   return (
@@ -55,29 +51,29 @@ const Header = () => {
         <div className="text-xl font-bold">
           <a href="/">BRAND</a>
         </div>
-
-        <nav className="hidden sm:flex items-center space-x-6 mx-4">
-          <a href="#" className=" font-medium">
-            Women
-          </a>
-          <a href="#" className=" font-medium">
-            Men
-          </a>
-          <a href="#" className="font-medium">
-            New Arrivals
-          </a>
-          <a href="#" className="font-medium">
-            Sale
-          </a>
-        </nav>
-
+        {showNav && (
+          <nav className="hidden sm:flex items-center space-x-6 mx-4">
+            <a href="#" className=" font-medium">
+              Women
+            </a>
+            <a href="#" className=" font-medium">
+              Men
+            </a>
+            <a href="#" className="font-medium">
+              New Arrivals
+            </a>
+            <a href="#" className="font-medium">
+              Sale
+            </a>
+          </nav>
+        )}
         <div className="flex items-center space-x-4">
           <button
             className="hidden sm:block"
             onClick={toggleSearch}
             aria-label="Search"
           >
-            <Search size={20} />
+            {showSearch && <Search size={20} />}
           </button>
           <div className="relative group">
             <a href="/account" className="hidden sm:block" aria-label="Account">
@@ -102,9 +98,6 @@ const Header = () => {
             </div>
           </div>
 
-          <a href="/wishlist" className="hidden sm:block" aria-label="Wishlist">
-            <Heart size={20} />
-          </a>
           <a href="/cart" className="relative" aria-label="Cart">
             <Badge count={3} size="small">
               <ShoppingCart size={20} />
@@ -148,22 +141,30 @@ const Header = () => {
         <div className="flex flex-col h-full">
           <div className="p-4">
             <div className="flex justify-center items-center gap-2 mb-5">
-              <AutoComplete
-                style={{ width: 200, textAlign: "start" }}
-                options={options}
-                placeholder="Search for clothing"
-                value={dropDownValue}
-                onChange={(value) => setDropDownValue(value)}
-                filterOption={(inputValue, option) =>
-                  option &&
-                  option.value &&
-                  option.value.toUpperCase().includes(inputValue.toUpperCase())
-                }
-              />
-              <button type="button" onClick={handleSearch}>
-                <Search />
-              </button>
+              {showSearch && (
+                <>
+                  <AutoComplete
+                    style={{ width: 200, textAlign: "start" }}
+                    options={options}
+                    placeholder="Search for clothing"
+                    value={dropDownValue}
+                    onChange={(value) => setDropDownValue(value)}
+                    filterOption={(inputValue, option) =>
+                      option &&
+                      option.value &&
+                      option.value
+                        .toUpperCase()
+                        .includes(inputValue.toUpperCase())
+                    }
+                  />
+
+                  <button type="button" onClick={handleSearch}>
+                    <Search />
+                  </button>
+                </>
+              )}
             </div>
+
             <div className="flex flex-col space-y-4">
               <div className=" pb-2">
                 <a className="font-medium ">Women</a>
@@ -188,10 +189,6 @@ const Header = () => {
               <a href="#" className="flex items-center gap-2">
                 <User size={18} />
                 <span>My Account</span>
-              </a>
-              <a href="#" className="flex items-center gap-2">
-                <Heart size={18} />
-                <span>Wishlist</span>
               </a>
               <a href="#" className="flex items-center gap-2">
                 <ShoppingCart size={18} />
