@@ -83,27 +83,31 @@ The application should now be running on [http://localhost:3000](http://localhos
 ## Project Structure
 
 ```
-Amnil-Ecom/
+AMNIL-ECOM/
+├── node_modules/
 ├── public/
+│   ├── purple.jpg
+│   └── vite.svg
 ├── src/
 │   ├── assets/
 │   ├── components/
-│   ├── context/
-│   ├── hooks/
+│   ├── lib/
 │   ├── pages/
-│   ├── redux/
-│   │   ├── actions/
-│   │   ├── reducers/
-│   │   └── store.js
-│   ├── services/
-│   ├── utils/
-│   ├── App.js
-│   └── index.js
+│   ├── routes/
+│   ├── styles/
+│   ├── App.jsx
+│   ├── index.css
+│   └── main.jsx
 ├── .env
 ├── .gitignore
 ├── db.json
+├── eslint.config.js
+├── index.html
+├── package-lock.json
 ├── package.json
-└── README.md
+├── README.md
+├── tailwind.config.js
+└── vite.config.js
 ```
 
 ## State Management
