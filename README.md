@@ -30,6 +30,7 @@ Amnil-Ecom is a modern e-commerce web application that demonstrates the implemen
 - **Redux**: State management
 - **Context API**: Alternative state management
 - **Ant Design**: UI component library
+- **React Router**: Routing
 - **Axios**: HTTP client
 - **JSON Server**: Local REST API for user data
 - **Fake Store API**: External API for product data
