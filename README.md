@@ -1,12 +1,142 @@
-# React + Vite
+# Amnil-Ecom
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Amnil-Ecom is a modern e-commerce web application that demonstrates the implementation of various state management solutions and third-party integrations. The application uses Context API, Redux, and localStorage for state management, while leveraging JSON Server for user data and the Fake Store API for product data.
 
-Currently, two official plugins are available:
+![Amnil-Ecom](https://api.placeholder.com/940/300)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
 
-## Expanding the ESLint configuration
+- **Multiple State Management Solutions**:
+  - Context API for global state
+  - Redux for complex state management
+  - localStorage for persistent state
+- **User Authentication**:
 
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+  - Login/Registration
+  - User profile management
+  - Session persistence
+
+- **Product Management**:
+  - Product listing with category filters
+  - Product search
+  - Product details
+- **Shopping Cart**:
+
+  - Add/remove items
+  - Adjust quantities
+  - Calculate totals
+
+- **Checkout Process**:
+
+  - Shipping information
+  - Payment method selection
+  - Order summary
+
+- **Order History**:
+  - View past orders
+  - Track order status
+
+## Tech Stack
+
+- **React.js**: Frontend library
+- **Redux**: State management
+- **Context API**: Alternative state management
+- **Ant Design**: UI component library
+- **Axios**: HTTP client
+- **JSON Server**: Local REST API for user data
+- **Fake Store API**: External API for product data
+- **localStorage**: Browser storage for state persistence
+
+## Installation
+
+Follow these steps to get the application running on your local machine:
+
+1. **Clone the repository**:
+
+   ```bash
+   git clone https://github.com/cHANGTEEZY/Amnil-Ecom.git
+   cd Amnil-Ecom
+   ```
+
+2. **Install dependencies**:
+
+   ```bash
+   npm install
+   ```
+
+3. **Set up JSON Server for user data**:
+
+   ```bash
+   npm install -g json-server
+   ```
+
+4. **Create a db.json file in the root directory**:
+
+   ```json
+   {
+     "users": []
+   }
+   ```
+
+5. **Start JSON Server**:
+
+   ```bash
+   json-server --watch db.json --port 3001
+   ```
+
+6. **Start the development server**:
+   ```bash
+   npm start
+   ```
+
+The application should now be running on [http://localhost:3000](http://localhost:3000).
+
+## Project Structure
+
+```
+Amnil-Ecom/
+├── public/
+├── src/
+│   ├── assets/
+│   ├── components/
+│   ├── context/
+│   ├── hooks/
+│   ├── pages/
+│   ├── redux/
+│   │   ├── actions/
+│   │   ├── reducers/
+│   │   └── store.js
+│   ├── services/
+│   ├── utils/
+│   ├── App.js
+│   └── index.js
+├── .env
+├── .gitignore
+├── db.json
+├── package.json
+└── README.md
+```
+
+## State Management
+
+The application demonstrates three different approaches to state management:
+
+1. **Redux**: Used for complex state that needs to be accessed across multiple components, such as cart state and user authentication.
+
+2. **Context API**: Used for theme settings, notifications, and other global UI states.
+
+3. **localStorage**: Used to persist user preferences, cart items, and authentication tokens between sessions.
+
+## API Integration
+
+### JSON Server
+
+The application uses JSON Server to simulate a backend API for user data. User information is stored in the `/users` route.
+
+### Fake Store API
+
+Product data is fetched from the Fake Store API, which provides a comprehensive set of e-commerce endpoints including products, categories, and carts.
+
+## Using Ant Design
+
+The project leverages Ant Design for UI components. The component library provides a consistent design system and speeds up development.
