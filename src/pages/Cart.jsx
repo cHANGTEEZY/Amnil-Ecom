@@ -7,14 +7,13 @@ import {
   updateQuantity,
   clearCart,
 } from "../lib/store/cartSlice";
-import Header from "../components/Header"
-import Footer from "../components/Footer"
+import Header from "../components/Header";
+import Footer from "../components/Footer";
 
 const Cart = () => {
   const cartItems = useSelector(selectCartItems);
   const totalPrice = useSelector(selectTotalPrice);
   const dispatch = useDispatch();
-
 
   return (
     <div className="max-w-[1400px] mx-auto p-5">
@@ -26,7 +25,6 @@ const Cart = () => {
         <>
           <div className="space-y-4">
             {cartItems.map((item) => (
-
               <div
                 key={item.id}
                 className="flex items-center justify-between p-4 bg-white rounded-lg shadow"
@@ -68,6 +66,12 @@ const Cart = () => {
               <h3 className="text-xl font-bold">
                 Total: ${totalPrice.toFixed(2)}
               </h3>
+              <button
+                onClick={() => dispatch(clearCart())}
+                className="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700"
+              >
+                Buy Cart
+              </button>
               <button
                 onClick={() => dispatch(clearCart())}
                 className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700"

@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { useDispatch } from "react-redux";
-import { addItem } from "../lib/store/cartSlice";
+import { addItem, clearCart } from "../lib/store/cartSlice";
 
 const Product = () => {
   const [selectedProduct, setSelectedProduct] = useState({});
@@ -67,7 +67,10 @@ const Product = () => {
           </p>
 
           <div className="flex gap-4">
-            <button className="w-full py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-all">
+            <button
+              onClick={() => dispatch(clearCart())}
+              className="w-full py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-all"
+            >
               Buy Now
             </button>
             <button
