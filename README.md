@@ -24,16 +24,6 @@ Amnil-Ecom is a modern e-commerce web application that demonstrates the implemen
   - Adjust quantities
   - Calculate totals
 
-- **Checkout Process**:
-
-  - Shipping information
-  - Payment method selection
-  - Order summary
-
-- **Order History**:
-  - View past orders
-  - Track order status
-
 ## Tech Stack
 
 - **React.js**: Frontend library
