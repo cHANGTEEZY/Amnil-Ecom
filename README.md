@@ -2,8 +2,6 @@
 
 Amnil-Ecom is a modern e-commerce web application that demonstrates the implementation of various state management solutions and third-party integrations. The application uses Context API, Redux, and localStorage for state management, while leveraging JSON Server for user data and the Fake Store API for product data.
 
-![Amnil-Ecom](https://api.placeholder.com/940/300)
-
 ## Features
 
 - **Multiple State Management Solutions**:
