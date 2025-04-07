@@ -7,6 +7,8 @@ import { options } from "../lib/constants/SearchOptions";
 import SearchContext from "../lib/context/SearchContext";
 import AuthContext from "../lib/context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { selectTotalItems } from "../lib/store/cartSlice";
 
 const Header = ({ showNav = true, showSearch = true }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -14,6 +16,7 @@ const Header = ({ showNav = true, showSearch = true }) => {
   const [dropDownValue, setDropDownValue] = useState("");
   const { setSearchValue } = useContext(SearchContext);
   const { setIsAuthenticated } = useContext(AuthContext);
+  const totalItems = useSelector(selectTotalItems);
 
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!mobileMenuOpen);
@@ -22,6 +25,22 @@ const Header = ({ showNav = true, showSearch = true }) => {
   const toggleSearch = () => {
     setSearchVisible(!searchVisible);
   };
+
+  const categoryMap = {
+    Women: "women's clothing",
+    Men: "men's clothing",
+    electronics: "electronics",
+    jewelery: "jewelery",
+  };
+
+  const handleCategoryClick = (category) => {
+    const searchValue = categoryMap[category]
+    setSearchValue(searchValue);
+    setDropDownValue(category);
+    setSearchVisible(false);
+    setMobileMenuOpen(false);
+  };
+
 
   const handleSearch = () => {
     setSearchValue(dropDownValue);
@@ -53,19 +72,17 @@ const Header = ({ showNav = true, showSearch = true }) => {
         </div>
         {showNav && (
           <nav className="hidden sm:flex items-center space-x-6 mx-4">
-            <a href="#" className=" font-medium">
-              Women
-            </a>
-            <a href="#" className=" font-medium">
-              Men
-            </a>
-            <a href="#" className="font-medium">
-              New Arrivals
-            </a>
-            <a href="#" className="font-medium">
-              Sale
-            </a>
+            {["Women", "Men", "electronics", "jewelery"].map((category) => (
+              <button
+                key={category}
+                onClick={() => handleCategoryClick(category)}
+                className="font-medium capitalize hover:underline"
+              >
+                {category}
+              </button>
+            ))}
           </nav>
+
         )}
         <div className="flex items-center space-x-4">
           <button
@@ -99,7 +116,7 @@ const Header = ({ showNav = true, showSearch = true }) => {
           </div>
 
           <a href="/cart" className="relative" aria-label="Cart">
-            <Badge count={3} size="small">
+            <Badge count={totalItems} size="small">
               <ShoppingCart size={20} />
             </Badge>
           </a>
@@ -166,22 +183,17 @@ const Header = ({ showNav = true, showSearch = true }) => {
             </div>
 
             <div className="flex flex-col space-y-4">
-              <div className=" pb-2">
-                <a className="font-medium ">Women</a>
-              </div>
-              <div className=" pb-2">
-                <a className="font-medium ">Men</a>
-              </div>
-              <div className="pb-2">
-                <a href="#" className="font-medium">
-                  New Arrivals
-                </a>
-              </div>
-              <div>
-                <a href="#" className="font-medium">
-                  Sale
-                </a>
-              </div>
+              {["Women", "Men", "electronics", "jewelery"].map((category) => (
+                <div className="pb-2" key={category}>
+                  <button
+                    onClick={() => handleCategoryClick(category)}
+                    className="font-medium capitalize"
+                  >
+                    {category}
+                  </button>
+                </div>
+              ))}
+
             </div>
           </div>
           <div className="mt-auto border-t">

@@ -47,11 +47,13 @@ export const { addItem, removeItem, updateQuantity, clearCart } =
 
 export default cartSlice.reducer;
 
-export const selectCartItems = (state) => state.cart.cart || [];
+export const selectCartItems = (state) => state.cart || [];
 export const selectTotalItems = (state) =>
-  selectCartItems(state).reduce((total, item) => total + item.quantity, 0);
+  (state.cart || []).reduce((total, item) => total + item.quantity, 0);
+
 export const selectTotalPrice = (state) =>
-  selectCartItems(state).reduce(
+  (state.cart || []).reduce(
     (total, item) => total + item.price * item.quantity,
     0
   );
+

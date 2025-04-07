@@ -6,6 +6,7 @@ const SearchContext = createContext();
 
 export const SearchContextProvider = ({ children }) => {
   const [searchValue, setSearchValue] = useState("All Products");
+  console.log("search value is ", searchValue)
   const [items, setItems] = useState([]);
   const [apiError, setApiError] = useState("");
 

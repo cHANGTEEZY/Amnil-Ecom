@@ -2,29 +2,31 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
   selectCartItems,
-  selectTotalItems,
   selectTotalPrice,
   removeItem,
   updateQuantity,
   clearCart,
 } from "../lib/store/cartSlice";
+import Header from "../components/Header"
+import Footer from "../components/Footer"
 
 const Cart = () => {
   const cartItems = useSelector(selectCartItems);
-  const totalItems = useSelector(selectTotalItems);
   const totalPrice = useSelector(selectTotalPrice);
   const dispatch = useDispatch();
 
+
   return (
     <div className="max-w-[1400px] mx-auto p-5">
-      <h2 className="text-2xl font-bold mb-4">Your Cart ({totalItems})</h2>
+      <Header showNav={false} showSearch={false} />
 
       {cartItems.length === 0 ? (
-        <p>Your cart is empty</p>
+        <p className="my-10 font-bold text-2xl">Your cart is empty</p>
       ) : (
         <>
           <div className="space-y-4">
             {cartItems.map((item) => (
+
               <div
                 key={item.id}
                 className="flex items-center justify-between p-4 bg-white rounded-lg shadow"
@@ -76,6 +78,7 @@ const Cart = () => {
           </div>
         </>
       )}
+      <Footer />
     </div>
   );
 };
