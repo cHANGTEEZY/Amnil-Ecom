@@ -6,50 +6,42 @@ const SearchContext = createContext();
 
 export const SearchContextProvider = ({ children }) => {
   const [searchValue, setSearchValue] = useState("All Products");
-  console.log("search value is ", searchValue)
   const [items, setItems] = useState([]);
-  const [apiError, setApiError] = useState("");
+  const [apiError, setApiError] = useState({});
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
+    const controller = new AbortController();
     const fetchProducts = async () => {
       try {
-        let url;
-        if (searchValue === "All Products") {
-          url = "https://fakestoreapi.com/products";
-        }
-        if (searchValue !== "All Products") {
-          url = `https://fakestoreapi.com/products/category/${searchValue}`;
-        }
+        setIsLoading(true);
+        let url =
+          searchValue === "All Products"
+            ? "https://fakestoreapi.com/products"
+            : `https://fakestoreapi.com/products/category/${searchValue.toLowerCase()}`;
 
         const response = await axios.get(url);
-
-        if (!response.data) {
-          throw new Error(
-            `Error fetching products for category: ${searchValue}`
-          );
-        }
-
         setItems(response.data);
+        setApiError({});
       } catch (error) {
-        setApiError(error.message);
-        console.error("Error fetching data:", error);
+        const statusCode = error.response?.status || 500;
+        const message = error.response?.data?.message || error.message;
+        setApiError({ code: statusCode, message });
+      } finally {
+        setIsLoading(false);
       }
     };
 
     fetchProducts();
 
     return () => {
-      setItems([]);
+      controller.abort();
     };
   }, [searchValue]);
 
-  if (apiError) {
-    return <ErrorPage message={apiError} />;
-  }
-
   return (
     <SearchContext.Provider
-      value={{ searchValue, setSearchValue, items, apiError }}
+      value={{ searchValue, setSearchValue, items, isLoading, apiError }}
     >
       {children}
     </SearchContext.Provider>

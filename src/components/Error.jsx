@@ -4,9 +4,9 @@ import React from "react";
 import { FileWarning } from "lucide-react";
 
 const ErrorPage = ({
-  code = 404,
-  title = "Page Not Found",
-  message = "Sorry, we couldn't find the page you're looking for.",
+  code = 500,
+  title = "Error",
+  message = "An unexpected error occurred.",
 }) => {
   return (
     <div className={styles["error-page"]}>
@@ -14,10 +14,10 @@ const ErrorPage = ({
         <div className={styles["error-icon"]}>
           <FileWarning size={80} />
         </div>
-
-        <h1 className={styles["error-title"]}>{title}</h1>
+        <h1 className={styles["error-title"]}>
+          {title} (Code: {code})
+        </h1>
         <p className={styles["error-message"]}>{message}</p>
-
         <div className={styles["error-actions"]}>
           <button
             onClick={() => window.history.back()}
@@ -25,10 +25,6 @@ const ErrorPage = ({
           >
             Go Back
           </button>
-        </div>
-
-        <div className={styles["error-code"]}>
-          <span>{code}</span>
         </div>
       </div>
     </div>

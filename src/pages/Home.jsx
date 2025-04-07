@@ -6,6 +6,8 @@ import SearchContext from "../lib/context/SearchContext";
 import { Card } from "antd";
 import Footer from "../components/Footer";
 import Hero from "../components/Hero";
+import ErrorPage from "../components/Error";
+import Loader from "../components/Loader";
 
 const Home = () => {
   const { isAuthenticated } = useContext(AuthContext);
@@ -17,15 +19,16 @@ const Home = () => {
     }
   }, [isAuthenticated, navigate]);
 
-  const { items, apiError, searchValue } = useContext(SearchContext);
+  const { items, apiError, searchValue, isLoading } = useContext(SearchContext);
+
+  if (apiError.message) {
+    return <ErrorPage message={apiError.message} code={apiError.code} />;
+  }
+
   const { Meta } = Card;
 
   const handleCardClick = (itemId) => {
-    if (!isAuthenticated) {
-      navigate("/signin");
-    } else {
-      window.open(`/product/${itemId}`, "_blank");
-    }
+    window.open(`/product/${itemId}`, "_blank");
   };
 
   return (
@@ -34,13 +37,23 @@ const Home = () => {
       <main>
         <Hero />
         <section className="py-6 px-4 max-w-[1400px] m-auto">
-          {items && items.length > 0 && !apiError ? (
+          {isLoading ? (
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+              {Array(10)
+                .fill(null)
+                .map((_, index) => (
+                  <Loader key={index} />
+                ))}
+            </div>
+          ) : items?.length > 0 ? (
             <>
               <h1
                 className="font-bold text-4xl text-gray-800 mb-5"
                 id="products"
               >
-                All {searchValue === "All Products" ? "" : searchValue} Products
+                {searchValue === "All Products"
+                  ? "All Products"
+                  : `${searchValue} Products`}
               </h1>
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                 {items.map((item) => (
@@ -65,10 +78,10 @@ const Home = () => {
                 ))}
               </div>
             </>
-          ) : apiError ? (
-            <span className="text-red-500">{apiError}</span>
           ) : (
-            <p className="text-center text-xl">No products available</p>
+            <p className="flex justify-center items-center h-[300px] text-3xl">
+              Product of given cirteria not available
+            </p>
           )}
         </section>
       </main>

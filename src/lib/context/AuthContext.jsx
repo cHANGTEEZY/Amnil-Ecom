@@ -33,21 +33,11 @@ export const AuthenticateProvider = ({ children }) => {
         }
 
         setUserDetails(response.data);
-      } catch (err) {
-        if (axios.isCancel(err)) {
-          console.log("Request canceled:", err.message);
-        } else if (err.response) {
-          const status = err.response.status;
-          if (status === 401) {
-            setError({ message: "Unauthorized access.", code: 401 });
-          } else if (status === 404) {
-            setError({ message: "User not found.", code: 404 });
-          } else {
-            setError({ message: "An unexpected error occurred.", code: 500 });
-          }
-        } else {
-          setError({ message: err.message, code: 500 });
-        }
+      } catch (error) {
+        const statusCode = error.response?.status || 500;
+        const message = error.response?.data?.message || error.message;
+        setError({ code: statusCode, message });
+        console.error(message);
       }
     };
 
