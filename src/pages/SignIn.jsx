@@ -10,8 +10,6 @@ const Signin = () => {
   const { setIsAuthenticated } = useContext(AuthContext);
   const navigate = useNavigate();
 
-  
-
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -41,7 +39,7 @@ const Signin = () => {
     setIsLoading(true);
     try {
       const response = await fetch(
-        `${BASE_URL}/users?email=${formData.email}&password=${formData.password}`
+        `${BASE_URL}/users?email=${formData.email}&password=${formData.password}`,
       );
 
       if (!response.ok) {

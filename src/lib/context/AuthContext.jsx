@@ -10,11 +10,17 @@ export const AuthenticateProvider = ({ children }) => {
   const [userId, setUserId] = useState(null);
   const [userDetails, setUserDetails] = useState([]);
   const [error, setError] = useState({ message: null, code: null });
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const token = localStorage.getItem("userAuthToken");
-    setIsAuthenticated(!!token);
-    setUserId(token);
+    const checkAuthentication = () => {
+      const token = localStorage.getItem("userAuthToken");
+      setIsAuthenticated(!!token);
+      setUserId(token);
+      setIsLoading(false);
+    };
+
+    checkAuthentication();
   }, []);
 
   useEffect(() => {
@@ -34,10 +40,12 @@ export const AuthenticateProvider = ({ children }) => {
 
         setUserDetails(response.data);
       } catch (error) {
-        const statusCode = error.response?.status || 500;
-        const message = error.response?.data?.message || error.message;
-        setError({ code: statusCode, message });
-        console.error(message);
+        if (!axios.isCancel(error)) {
+          const statusCode = error.response?.status || 500;
+          const message = error.response?.data?.message || error.message;
+          setError({ code: statusCode, message });
+          console.error(message);
+        }
       }
     };
 
@@ -48,13 +56,36 @@ export const AuthenticateProvider = ({ children }) => {
     };
   }, [userId]);
 
+  const login = (token) => {
+    localStorage.setItem("userAuthToken", token);
+    setIsAuthenticated(true);
+    setUserId(token);
+  };
+
+  const logout = () => {
+    localStorage.removeItem("userAuthToken");
+    setIsAuthenticated(false);
+    setUserId(null);
+    setUserDetails([]);
+  };
+
   if (error.message) {
     return <ErrorPage message={error.message} code={error.code} />;
   }
 
+  if (isLoading) {
+    return <div>Loading authentication...</div>;
+  }
+
   return (
     <AuthContext.Provider
-      value={{ isAuthenticated, setIsAuthenticated, userDetails }}
+      value={{
+        isAuthenticated,
+        setIsAuthenticated,
+        userDetails,
+        login,
+        logout,
+      }}
     >
       {children}
     </AuthContext.Provider>

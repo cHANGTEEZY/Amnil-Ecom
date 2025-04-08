@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import axios from "axios";
-import { Avatar, message as antdMessage } from "antd";
+import { Avatar } from "antd";
 
 import AuthContext from "../lib/context/AuthContext";
 import Header from "../components/Header";

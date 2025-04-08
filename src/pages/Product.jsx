@@ -19,7 +19,7 @@ const Product = () => {
       setLoading(true);
       try {
         const response = await axios.get(
-          `https://fakestoreapi.com/products/${productId}`
+          `https://fakestoreapi.com/products/${productId}`,
         );
         if (!response.data) {
           throw new Error("Error getting data");
@@ -69,7 +69,7 @@ const Product = () => {
           <div className="flex gap-4">
             <button
               onClick={() => dispatch(clearCart())}
-              className="w-full py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-all"
+              className="cursor-pointer  w-full py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-all"
             >
               Buy Now
             </button>
@@ -80,10 +80,10 @@ const Product = () => {
                     id: selectedProduct.id,
                     price: selectedProduct.price,
                     quantity: 1,
-                  })
+                  }),
                 )
               }
-              className="w-full py-3 bg-gray-300 text-gray-800 font-semibold rounded-lg hover:bg-gray-400 transition-all"
+              className="cursor-pointer  w-full py-3 bg-gray-300 text-gray-800 font-semibold rounded-lg hover:bg-gray-400 transition-all"
             >
               Add to Cart
             </button>

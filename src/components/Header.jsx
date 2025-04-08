@@ -34,13 +34,12 @@ const Header = ({ showNav = true, showSearch = true }) => {
   };
 
   const handleCategoryClick = (category) => {
-    const searchValue = categoryMap[category]
+    const searchValue = categoryMap[category];
     setSearchValue(searchValue);
     setDropDownValue(category);
     setSearchVisible(false);
     setMobileMenuOpen(false);
   };
-
 
   const handleSearch = () => {
     setSearchValue(dropDownValue);
@@ -60,7 +59,7 @@ const Header = ({ showNav = true, showSearch = true }) => {
     <header className="bg-white shadow-sm sticky top-0 z-50">
       <div className="px-4 py-4 flex items-center justify-between">
         <button
-          className="sm:hidden flex items-center"
+          className="sm:hidden flex items-center cursor-pointer"
           onClick={toggleMobileMenu}
           aria-label="Menu"
         >
@@ -76,13 +75,12 @@ const Header = ({ showNav = true, showSearch = true }) => {
               <button
                 key={category}
                 onClick={() => handleCategoryClick(category)}
-                className="font-medium capitalize hover:underline"
+                className="cursor-pointer font-medium capitalize hover:underline"
               >
                 {category}
               </button>
             ))}
           </nav>
-
         )}
         <div className="flex items-center space-x-4">
           <button
@@ -187,13 +185,12 @@ const Header = ({ showNav = true, showSearch = true }) => {
                 <div className="pb-2" key={category}>
                   <button
                     onClick={() => handleCategoryClick(category)}
-                    className="font-medium capitalize"
+                    className="cursor-pointer font-medium capitalize"
                   >
                     {category}
                   </button>
                 </div>
               ))}
-
             </div>
           </div>
           <div className="mt-auto border-t">

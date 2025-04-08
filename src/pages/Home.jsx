@@ -8,7 +8,6 @@ import ErrorPage from "../components/Error";
 import Loader from "../components/Loader";
 
 const Home = () => {
-  
   const { items, apiError, searchValue, isLoading } = useContext(SearchContext);
 
   if (apiError.message) {
@@ -38,7 +37,7 @@ const Home = () => {
           ) : items?.length > 0 ? (
             <>
               <h1
-                className="font-bold text-4xl text-gray-800 mb-5"
+                className="capitalize font-bold text-4xl text-gray-800 mb-5"
                 id="products"
               >
                 {searchValue === "All Products"
