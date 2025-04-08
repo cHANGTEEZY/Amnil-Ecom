@@ -2,7 +2,7 @@ const mode = "prod";
 
 const BASE_URL =
   mode === "prod"
-    ? "http://localhost:3000"
-    : "https://delightful-persistent-fowl.glitch.me";
+    ? "https://delightful-persistent-fowl.glitch.me"
+    : "http://localhost:3000";
 
 export default BASE_URL;
