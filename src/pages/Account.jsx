@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import axios from "axios";
-import { Avatar, message } from "antd";
+import { Avatar, message as antdMessage } from "antd";
 
 import AuthContext from "../lib/context/AuthContext";
 import Header from "../components/Header";
@@ -9,6 +9,7 @@ import BASE_URL from "../lib/constants/ApiUrl";
 
 const AccountPage = () => {
   const { userDetails } = useContext(AuthContext);
+  const [apiResponseMessage, setApiResponseMessage] = useState("");
 
   const [accountData, setAccountData] = useState({
     firstName: "",
@@ -69,18 +70,20 @@ const AccountPage = () => {
         `${BASE_URL}/users/${currentUser.id}`,
         {
           password: newPassword,
-        }
+        },
       );
 
+      console.log(response);
+
       if (response.status === 200) {
-        message.success("Password updated successfully!");
+        setApiResponseMessage("Password updated successfully");
       } else {
-        message.error(
-          "Failed to update password. Please check your current password."
+        setApiResponseMessage(
+          "Failed to update password. Please check your current password.",
         );
       }
     } catch (error) {
-      message.error("Error updating password. Please try again.");
+      setApiResponseMessage("Error updating password. Please try again.");
     }
   };
 
@@ -159,6 +162,9 @@ const AccountPage = () => {
               Update Password
             </button>
           </div>
+          {apiResponseMessage && (
+            <span className="text-green-300">{apiResponseMessage}</span>
+          )}
         </div>
       </div>
       <Footer />
