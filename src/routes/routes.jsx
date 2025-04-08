@@ -8,18 +8,25 @@ import Signin from "../pages/SignIn";
 import Product from "../pages/Product";
 import AccountPage from "../pages/Account";
 import Cart from "../pages/Cart";
+import ProtectedRoute from "./ProtectedRoute"
 
 const AppRoutes = () => {
   return (
     <Router>
       <Routes>
         <Route path="*" element={<ErrorPage />} />
-        <Route path="/" element={<Home />} />
-        <Route path="/signin" element={<Signin />} />
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/product/:id" element={<Product />} />
-        <Route path="/account" element={<AccountPage />} />
-        <Route path="/cart" element={<Cart />} />
+        
+        <Route element={<ProtectedRoute isAuthRequired={true} redirectPath="/signin" />}>
+          <Route path="/" element={<Home />} />
+          <Route path="/product/:id" element={<Product />} />
+          <Route path="/account" element={<AccountPage />} />
+          <Route path="/cart" element={<Cart />} />
+        </Route>
+        
+        <Route element={<ProtectedRoute isAuthRequired={false} redirectPath="/" />}>
+          <Route path="/signin" element={<Signin />} />
+          <Route path="/signup" element={<Signup />} />
+        </Route>
       </Routes>
     </Router>
   );

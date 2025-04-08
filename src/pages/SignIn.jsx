@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import Input from "../components/Input";
 import ErrorPage from "../components/Error";
@@ -7,14 +7,10 @@ import { validateFormData } from "../lib/utils/validateFormData";
 import BASE_URL from "../lib/constants/ApiUrl";
 
 const Signin = () => {
-  const { isAuthenticated, setIsAuthenticated } = useContext(AuthContext);
+  const { setIsAuthenticated } = useContext(AuthContext);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (isAuthenticated) {
-      navigate("/");
-    }
-  }, [isAuthenticated, navigate]);
+  
 
   const [formData, setFormData] = useState({
     email: "",

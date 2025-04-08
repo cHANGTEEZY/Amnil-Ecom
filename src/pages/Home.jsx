@@ -1,6 +1,4 @@
-import React, { useEffect, useContext } from "react";
-import AuthContext from "../lib/context/AuthContext";
-import { useNavigate } from "react-router-dom";
+import React, { useContext } from "react";
 import Header from "../components/Header";
 import SearchContext from "../lib/context/SearchContext";
 import { Card } from "antd";
@@ -10,15 +8,7 @@ import ErrorPage from "../components/Error";
 import Loader from "../components/Loader";
 
 const Home = () => {
-  const { isAuthenticated } = useContext(AuthContext);
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    if (!isAuthenticated) {
-      navigate("/signin");
-    }
-  }, [isAuthenticated, navigate]);
-
+  
   const { items, apiError, searchValue, isLoading } = useContext(SearchContext);
 
   if (apiError.message) {

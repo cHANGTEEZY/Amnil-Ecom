@@ -1,21 +1,12 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState,  } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import Input from "../components/Input";
 import ErrorPage from "../components/Error";
-import AuthContext from "../lib/context/AuthContext";
 import { validateFormData } from "../lib/utils/validateFormData";
 import BASE_URL from "../lib/constants/ApiUrl";
 
 const Signup = () => {
-  const { isAuthenticated } = useContext(AuthContext);
   const navigate = useNavigate();
-
-  useEffect(() => {
-    if (isAuthenticated) {
-      navigate("/");
-    }
-  }, [isAuthenticated, navigate]);
-
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
