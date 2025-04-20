@@ -70,7 +70,7 @@ Follow these steps to get the application running on your local machine:
 5. **Start JSON Server**:
 
    ```bash
-   json-server --watch db.json --port 3001
+   npx json-server --watch db.json --port 3001
    ```
 
 6. **Start the development server**:
